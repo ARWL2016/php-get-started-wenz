@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>PHP</title>
-</head>
-<body>
-  <?php 
+<!--session data is stored on the server, so-->
+<!--session_start must be called before html is sent-->
+<!--session data is a superglobal-->
+
+<?php
+  session_start(); 
+
+  $message = ''; 
 
   if (isset($_POST['name']) && isset($_POST['password'])) {
     $db = mysqli_connect('localhost', 'root', '', 'php'); 
@@ -18,15 +19,30 @@
       $isAdmin = $row['isAdmin']; 
 
       if (password_verify($_POST['password'], $hash)) {
-        echo 'Login successful'; 
+        $message = 'Login successful'; 
+
+        $_SESSION['user'] = $row['name'];
+        $_SESSION['isAdmin'] = $isAdmin; 
+
       } else {
-        echo 'Login failed'; 
+        $message = 'Login failed'; 
       }
     } else {
-      echo 'Login failed'; 
+      $message = 'Login failed'; 
     }
   }
 
+?><!DOCTYPE html>
+<html>
+<head>
+  <title>PHP</title>
+</head>
+<body>
+  <?php 
+  readfile('navigation.tmpl.html');
+
+  
+  echo "<p>$message</p>"
   ?> 
   <form method="post" action=""> 
     User name <input type="text" name="name"><br> 

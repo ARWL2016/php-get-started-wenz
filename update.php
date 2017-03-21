@@ -1,4 +1,7 @@
 <?php
+// redirect usnauthorised user to login
+  require 'auth.php'; 
+
 //the redirect must go before any html or may throw an error_get_last
 // this assumes that we reach the update page via a URL containing the user ID (held in $_GET)
 // we then extract this param and use it to make a database call
