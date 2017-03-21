@@ -5,12 +5,14 @@
 </head>
 
 <body>
-  <a href="insert.php">Add user</a> 
+  <?php
+    readfile('navigation.tmpl.html');
+  ?>
 
 <ul> 
 
   <?php
-
+  
   $db = mysqli_connect('localhost', 'root', '', 'php'); 
   $sql = 'SELECT * FROM users';
   $result = mysqli_query($db, $sql);

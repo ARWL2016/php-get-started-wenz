@@ -14,9 +14,10 @@
   <title>PHP</title>
 </head>
 <body>
-<a href="insert.php">Add user</a> 
-<a href="select.php">See list</a> 
+
 <?php 
+  readfile('navigation.tmpl.html');
+
   $db = mysqli_connect('localhost', 'root', '', 'php');
   $sql = "DELETE FROM users WHERE id=$id";
   mysqli_query($db, $sql);
